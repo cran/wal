@@ -1,0 +1,101 @@
+---
+title: "Reading and writing Quake WAL textures with wal"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reading and writing Quake WAL textures with wal}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+In this document, we show how to read, write, import and export WAL textures, which are used by idtech1 and idtech2 games.
+
+
+## Reading WAL files
+
+If you only need the pixel data of a WAL file, try this:
+
+```{r}
+library("wal");
+wal_file = system.file("extdata", "bricks.wal", package = "wal", mustWork = TRUE);
+wal_image = wal::readWAL(wal_file);
+```
+
+The return value is an array with 3 dimensions, representing image width, height, and channels. It contains RGB color values in range 0..1:
+
+```{r}
+dim(wal_image);
+```
+
+
+To read the WAL file and get more detailed data, including the header and all mipmaps, read it into a wal instance instead:
+
+```{r}
+wal = wal::read.wal(wal_file);
+```
+
+This allows you to do more things, like converting to other formats and re-writing to other files. The wal instance is a named list, feel free to explore it. E.g., to see the header information, do this:
+
+```{r}
+wal$header$width;
+```
+
+### Preview a WAL texture in R
+
+If you loaded a wal instance, you can plot it:
+
+```{r}
+plot(wal);
+```
+
+This plots the largest mip level with the Quake 2 palette. If you need more control, e.g., you want to plot a different mip level or use a certain palette, use plotwal.mipmap instead:
+
+```{r}
+plotwal.mipmap(wal, apply_palette = wal::pal_q2(), mip_level = 1)
+```
+
+The mipmaps are 0..3, where 0 is the largest (highest quality) version. Let's look at the lowest quality version with the Q1 palette:
+
+```{r}
+plotwal.mipmap(wal, apply_palette = wal::pal_q1(), mip_level = 3)
+```
+
+As you can see, the Q1 palette fits this particular image worse than the Q2 palette:
+
+```{r}
+plotwal.mipmap(wal, apply_palette = wal::pal_q2(), mip_level = 3)
+```
+
+### Writing WAL image files
+
+You can write a WAL instance to a file like this:
+
+```{r, eval = FALSE}
+writeWAL("~/mytexture.wal", wal);
+```
+
+
+### Exporting to PNG and JPEG
+
+Exporting a WAL instance to JPEG or PNG format is straightforward:
+
+```{r, eval = FALSE}
+wal.export.to.jpeg(wal, "~/mytexture.jpg");
+wal.export.to.png(wal, "~/mytexture.png");
+```
+
+### Converting JPG or PNG images to WAL format
+
+This way is tricky for several reasons: WAL files must have certain dimensions and they use a fixed palette with 256 colors. This means that if you convert a JPG or PNG image, which can have 16 million different colors, to a file to WAL format, it will look different (unless, by coincidence, the image only consists of colors which occur in the palette). During the conversion, each color in the source image is replaced with the most similar color from the palette. Of course, different input colors may be mapped to the same palette color, so the quality will be worse. How much worse depends on how well the palette fits the source image.
+
+That all being said, if you have input files in PNG or JPEG format, you can covert them to WAL like this:
+
+```{r, eval = FALSE}
+wal_imported = img.to.wal(png::readPNG("~/mytexture.png"));
+writeWAL("~/mytexture.wal", wal_imported);
+
+wal_imported = img.to.wal(jpeg::readJPEG("~/mytexture.jpg"));
+writeWAL("~/mytexture.wal", wal_imported);
+```
+
+The widths and heights of the input files must be a power of 2. Typical values used in the games are 16, 32, 64, 128, 256, and 512. The width and height for a single file be different. So 32x256 and 64x64 are fine, but 50x50 is not. When importing PNGs, also keep in mind that WAL does not support the alpha channel.
+
