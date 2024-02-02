@@ -1,4 +1,4 @@
-df1b173100ef8ced3384d14328378487 *DESCRIPTION
+04ac1cdcc2cbafa3d6fa696e10e6935b *DESCRIPTION
 46722ae181a26edc8b10113c863b6755 *NAMESPACE
 ccef163bf5c3d32026e6ccd67fb96ba2 *R/export.R
 aba3826a572bf9c776c65a6037b944e1 *R/image_to_wal.R
@@ -9,12 +9,12 @@ aba3826a572bf9c776c65a6037b944e1 *R/image_to_wal.R
 3281a6dc5e37dbffb593086f768ffa29 *R/read_pak.R
 8ccf2257f27f11b6c07b60bbc716b860 *R/read_quake_archive.R
 b4b1fa728cdcbdc2bebedb8f21b58727 *R/read_wad.R
-fd6159ad457896eca30eb9bef56e902a *R/read_wal.R
+d0524a4a27cec144cf5f6b3c393a83c6 *R/read_wal.R
 d477bbc76dec7f0c9ecda35fc2f6dd4d *R/write_wal.R
-fa178d9d0490e3d3fac816c9ac55c461 *build/vignette.rds
-2710e4fcc5a2638780272264733e00fe *inst/doc/wal.R
+8299d846a07b7c4c3a1c0f8cadf70f20 *build/vignette.rds
+4f3d7e1963b5d6558cc58e40c5e6d8b8 *inst/doc/wal.R
 362194e1613fdd35e4b4ddbc29e7ba15 *inst/doc/wal.Rmd
-0b4ad1f8ec9edd2a45b6f0d18ce28bbe *inst/doc/wal.html
+9dd87b9097ab95ac76910fdd599f39a8 *inst/doc/wal.html
 4655d909f4e192c69fd409be245931fa *inst/extdata/Bricks050_256_Color.jpg
 2f2281887cd6ef7c51762f2396de20e9 *inst/extdata/Bricks050_256_Color.png
 926de8f62a3185658b717ea34099d42d *inst/extdata/Bricks050_256_Color_LICENSE.txt
@@ -28,8 +28,8 @@ ccbd8bb2b6c6540219d20f99fb157e8a *man/closest.color.from.palette.Rd
 a2fe2d849a23098f981eb8cf49f6c696 *man/get.mipmap.data.offsets.Rd
 781106867266efe5036bc70088553dd7 *man/get.wadentry.type.strings.Rd
 43b21c7ea97764df969239466f378c98 *man/get.wal.mipmap.data.Rd
-fb4ba50fde00b5f424dfe72b70bfb6a1 *man/get.wal.mipmap.heights.Rd
-4e4457f2663c8610e7c780ad1ed3e592 *man/get.wal.mipmap.widths.Rd
+6795977682e4fb40fe4b9605d05a0705 *man/get.wal.mipmap.heights.Rd
+518e2be48d0013fae2f652f440adc84d *man/get.wal.mipmap.widths.Rd
 a786939a44d005326418a9c599d12f64 *man/half.image.Rd
 717b9d370ee5ae31701db9059d56fa26 *man/img.to.wal.Rd
 2d83d5228426bc5c539a3ac7cdd5feac *man/is.quakemodel.Rd
